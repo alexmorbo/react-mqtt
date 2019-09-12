@@ -1,0 +1,25 @@
+{
+    "name": "alexmorbo/react-mqtt",
+    "description": "Async MQTT client in reactphp",
+    "keywords": ["mqtt", "IoT"],
+    "license": "LGPL",
+    "authors": [
+        {
+            "name": "AlexMorbo",
+            "email": "alex@morbo.ru"
+        },
+        {
+            "name": "Oliver Lorenz",
+            "email": "mail@oliverlorenz.com"
+        }
+    ],
+    "require": {
+        "react/socket": "^1.3",
+        "psr/log": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Morbo\\React\\Mqtt\\": "src/"
+        }
+    }
+}
