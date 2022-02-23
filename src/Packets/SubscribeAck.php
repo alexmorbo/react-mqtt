@@ -37,7 +37,7 @@ class SubscribeAck extends ControlPacket
     {
         $packet = new static($version);
 
-        $length = ord($rawInput{1});
+        $length = ord($rawInput[1]);
         $message = substr($rawInput, 2, $length - 1);
         $data = unpack("n*", $message);
         $packet->setPacketId($data[1]);
