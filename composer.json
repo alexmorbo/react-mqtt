@@ -2,7 +2,7 @@
     "name": "alexmorbo/react-mqtt",
     "description": "Async MQTT client in reactphp",
     "keywords": ["mqtt", "IoT"],
-    "license": "LGPL",
+    "license": "MIT",
     "authors": [
         {
             "name": "AlexMorbo",
