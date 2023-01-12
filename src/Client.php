@@ -14,6 +14,8 @@ use Psr\Log;
 use React\EventLoop;
 use React\Promise;
 use React\Socket;
+use function React\Promise\reject;
+use function React\Promise\resolve;
 
 class Client
 {
@@ -169,13 +171,13 @@ class Client
             });
         }
 
-        return new Promise\FulfilledPromise($stream);
+        return resolve($stream);
     }
 
     public function subscribe(Socket\ConnectionInterface $stream, $topic, $qos = 0): Promise\PromiseInterface
     {
         if ($this->state !== self::STATE_CONNECTED) {
-            return new Promise\RejectedPromise('Connection unavailable');
+            return reject('Connection unavailable');
         }
 
         $subscribePacket = new Packets\Subscribe($this->version);
@@ -202,7 +204,7 @@ class Client
     public function unsubscribe(Socket\ConnectionInterface $stream, $topic): Promise\PromiseInterface
     {
         if ($this->state !== self::STATE_CONNECTED) {
-            return new Promise\RejectedPromise('Connection unavailable');
+            return reject('Connection unavailable');
         }
 
         $unsubscribePacket = new Packets\Unsubscribe($this->version);
@@ -236,7 +238,7 @@ class Client
     ): Promise\PromiseInterface
     {
         if ($this->state !== self::STATE_CONNECTED) {
-            return new Promise\RejectedPromise('Connection unavailable');
+            return reject('Connection unavailable');
         }
 
         $publishPacket = new Packets\Publish($this->version);
@@ -283,7 +285,7 @@ class Client
         $packet = new Packets\Disconnect($this->version);
         $this->sendPacketToStream($stream, $packet);
 
-        return new Promise\FulfilledPromise($stream);
+        return resolve($stream);
     }
 
     protected function sendPacketToStream(
